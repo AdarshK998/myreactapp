@@ -1,78 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from 'react'
+import { Tabs } from 'antd';
+import Justnesstabs from './Justnesstabs';
+import Transparency from './Transparency';
+function callback(key) {
+    console.log(key);
+  }
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-   
-  },
-}));
+const { TabPane } = Tabs;
 
 export default function Subtabs1() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="sticky" style={{margintop:536 }}>
-          <Tab label="Justness" {...a11yProps(0)} />
-          <Tab label="Transparency" {...a11yProps(1)} />
-          <Tab label="Privacy" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </div>
-  );
+    return (
+        <div>
+         <Tabs className='alltabs1' defaultActiveKey="1" onChange={callback} type='card' >
+    <TabPane className='Justness'  tab= "Justness" key="1" >
+      <div style={{display:'flex',flexDirection:'column',textAlign:'left', marginLeft:23}}>
+      <div>
+        Brillio's Responsible AI follows a structured 2 layered approach for Justness @ Data and Algorithm Level:
+      </div>
+      <div style={{paddingTop:13}}>
+        a) Bias Detection: Automated Framework for detecting bias
+      </div>
+      <div style={{paddingTop:13}}>
+        b) Bias Mitigation: Automated Framework for mitigating bias
+      </div>
+      </div>
+      <div className='container4'>
+        <Justnesstabs/>
+      </div>
+    </TabPane>
+    <TabPane className='Transparency'   tab="Transparency" key="2"  >
+      
+      <Transparency/>
+    </TabPane>
+    <TabPane className='Privacy'   tab= "Privacy" key="3">
+      Content of Tab Pane 3
+    </TabPane>
+  </Tabs>
+        </div>
+    )
 }
